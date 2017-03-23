@@ -24,6 +24,8 @@ private:
     static int totalBirths;
     static int totalDeaths;
     
+    
+    
 public:
     void setName(string name){this -> name = name;}
     void setSex(string sex){this -> sex = sex;}
@@ -33,12 +35,12 @@ public:
     void setDeceased(bool choice){deceased = choice;}
     
     
-    string getName(){return name;}
-    string getSex(){return sex;}
-    string getColor(){return color;}
-    int getAge(){return age;}
-    bool isRadioactiveMutant(){return radioactive_mutant_vampire_bunny;}
-    bool isDeceased(){return deceased;}
+    string getName(){return this->name;}
+    string getSex(){return this->sex;}
+    string getColor(){return this->color;}
+    int getAge(){return this->age;}
+    bool isRadioactiveMutant(){return this->radioactive_mutant_vampire_bunny;}
+    bool isDeceased(){return this->deceased;}
     void increaseAge(int age)
     {
         this->setAge(this->getAge()+1);
@@ -63,10 +65,18 @@ int Rabbit::populationTotal = 0;
 int Rabbit::totalBirths = 0;
 int Rabbit::totalDeaths = 0;
 
+string lineWithName;
+ifstream bunnyNamesFile("bunnyNames.txt");
 
 Rabbit::Rabbit()
 {
-    setName("sameName");
+    //set bunny name from line in .txt file
+    if(bunnyNamesFile.is_open())
+    {
+        getline(bunnyNamesFile, lineWithName);
+        setName(lineWithName);
+    }
+    
     
     
     //set sex
@@ -82,11 +92,15 @@ Rabbit::Rabbit()
         femaleBunnyCount++;
     }
     
-    
-    setColor("white");
+    //set color
+    int colorNum = rand() % 4;
+    //white=0,brown=1,black=2,spotted=3
+    if(colorNum == 0) setColor("white");
+    else if(colorNum == 1) setColor("brown");
+    else if(colorNum == 2) setColor("black");
+    else if(colorNum == 3) setColor("spotted");
     
     setAge(0);
-    
     
     //set radioactive_mutant_vampire_bunny status
     int isRandNum1 = rand() % 100 + 1;
@@ -107,7 +121,12 @@ Rabbit::Rabbit(string name, string sex, string color, int age, bool mutantStatus
 
 Rabbit::Rabbit(string color)
 {
-	setName("sameName");
+    //set bunny name from line in .txt file
+    if(bunnyNamesFile.is_open())
+    {
+        getline(bunnyNamesFile, lineWithName);
+        setName(lineWithName);
+    }
 	
 	
 	//set sex

@@ -34,7 +34,7 @@ public: //Functions go here
     LinkedList bunniesAreBorn();
     void bunniesGetOlder();
     //void bunniesCanBeMutantVamps();
-    //void bunniesDie();
+    //LinkedList bunniesDie();
     LinkedList combineNewbornsList(LinkedList newbornsList);
 };
 
@@ -81,7 +81,7 @@ void LinkedList::deleteNode(Rabbit deleteBunny)
     temp = head;
     current = head;
     
-    while(current != NULL && current->data.getName() != deleteBunny.getName())
+    while(current != NULL && !current->data.getName().compare(deleteBunny.getName()))
     {
         temp = current;
         current = current->next;
@@ -101,8 +101,11 @@ void LinkedList::deleteNode(Rabbit deleteBunny)
             head = head->next;
             temp = NULL;
         }
+        
+        cout << deletePtr->data.getName() << " was deleted from the list\n"<< endl;
         delete deletePtr;
-        cout << deleteBunny.getName() << " was deleted from the list\n";
+        
+        
         
         size--;
     }
@@ -135,17 +138,18 @@ LinkedList LinkedList::combineNewbornsList(LinkedList newbornsList)
     
     while(current != NULL)
     {
+        newCombinedList.addNode(current->data);
         current = current->next;
     }
     
-    current->next = newbornsList.head;
+    current = newbornsList.head;
     
-    current = head;
+    //current = head;
     
     while(current != NULL)
     {
         newCombinedList.addNode(current->data);
-        newCombinedList.size++;
+        //newCombinedList.size++;
         current = current->next;
     }
     
@@ -157,47 +161,62 @@ LinkedList LinkedList::bunniesAreBorn()
 {
     LinkedList babyBunniesList;
     current = head;
-    Rabbit bunny = current->data;
+    //Rabbit bunny = current->data;
     bool isAtLeastOneMale = false;
     
-    while(current != NULL || isAtLeastOneMale)
+    while(current != NULL && !isAtLeastOneMale)
     {
-        if(!bunny.isRadioactiveMutant())
+        if(!current->data.isRadioactiveMutant())
         {
-            if(bunny.getSex().compare("male"))
+            if(current->data.getSex().compare("male"))
             {
-                if(bunny.getAge() >= 2)
+                if(current->data.getAge() >= 2)
                 {
                     isAtLeastOneMale = true;
+                    cout << "there is @least 1 non-mutantVamp male w/age > 2\n "<<endl;
                 }
-                else current = current->next;
+                else
+                {
+                    current = current->next;
+                    //if(current != NULL) bunny = current->data;
+                }
             }
-            else current = current->next;
+            else
+            {
+                current = current->next;
+                //if(current != NULL) bunny = current->data;
+            }
         }
-        else
-        {
-            current = current->next;
-            bunny = current->data;
-        }
+        
+        current = current->next;
+        //if(current != NULL) bunny = current->data;
     }
     
     current = head;
-    bunny = current->data;
+    //bunny = current->data;
     Rabbit newBaby;
     
     if(isAtLeastOneMale)
     {
         while(current != NULL)
         {
-            if(bunny.getSex().compare("female") && bunny.getAge() >= 2)
+            if(current->data.getSex() == "female" && current->data.getAge() >= 2)
             {
-                newBaby = Rabbit(bunny.getColor());
+                cout <<current->data.getColor() <<" "<< current->data.getSex() << " is about to give birth! " <<endl;
+                
+                newBaby = Rabbit(current->data.getColor());
                 babyBunniesList.addNode(newBaby);
+                
+                cout << current->data.getSex() << " just gave birth to " << newBaby.getColor() <<" "<< newBaby.getName() <<"\n"<< endl;
             }
+            
             current = current->next;
+            //if(current != NULL) bunny = current->data;
+            
         }
     }
     
+    //babyBunniesList.printList();
                
     return babyBunniesList;
     

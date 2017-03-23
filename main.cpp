@@ -18,11 +18,11 @@ int main(int argc, char** argv)
 {
     LinkedList bunnyList;
     
-    Rabbit bunny1 = Rabbit("white");
-    Rabbit bunny2 = Rabbit("brown");
-    Rabbit bunny3 = Rabbit("black");
-    Rabbit bunny4 = Rabbit("spotted");
-    Rabbit bunny5 = Rabbit("white");
+    Rabbit bunny1 = Rabbit();
+    Rabbit bunny2 = Rabbit();
+    Rabbit bunny3 = Rabbit();
+    Rabbit bunny4 = Rabbit();
+    Rabbit bunny5 = Rabbit();
     
     bunnyList.addNode(bunny1);
     bunnyList.addNode(bunny2);
@@ -35,14 +35,14 @@ int main(int argc, char** argv)
     cout << bunnyList.getSize() << " bunnies are in the list"<< endl;
     cout << "***********************************\n" << endl;
     
-    bunnyList.deleteNode(bunny3);
+   /* bunnyList.deleteNode(bunny3);
     bunnyList.deleteNode(bunny4);
     bunnyList.deleteNode(bunny5);
     
     bunnyList.printList();
     cout << "***********************************" << endl;
     cout << bunnyList.getSize() << " bunnies are in the list"<<endl;
-    cout << "***********************************\n" << endl;
+    cout << "***********************************\n" << endl;*/
     
     /*cin >> "Press "
     int x = 1;
@@ -78,22 +78,36 @@ int main(int argc, char** argv)
         //if(getPopulationTotal > 1000) food shortage kills half @random
         
         bunnyList.bunniesGetOlder();
+        bunnyList.bunniesGetOlder();
+        bunnyList.bunniesGetOlder();
+        cout << "\n\nBunnies got older!\n\n" << endl;
+    
     
         LinkedList newbornBunnies = bunnyList.bunniesAreBorn();
+        cout << "****************Newborns*******************" << endl;
+    
+        newbornBunnies.printList();
+    
+        cout << "****************Newborns*******************\n" << endl;
         if(newbornBunnies.getHead() != NULL)
         {
+            cout << "\n\nAdding newborns to family!\n\n" << endl;
             bunnyList = bunnyList.combineNewbornsList(newbornBunnies);
         }
     
+    
+        cout << "\n\nPRINTING LAST LIST:\n" << endl;
         bunnyList.printList();
     
-        
+        delete bunnyList.getHead();
+        bunnyNamesFile.close();
+    
     
     
       // x = x + 1;
     //}
     
-    bunnyList.printList();
+    //bunnyList.printList();
     
     return 0;
     
