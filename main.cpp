@@ -80,15 +80,26 @@ int main(int argc, char** argv)
         bunnyList.bunniesGetOlder();
         bunnyList.bunniesGetOlder();
         bunnyList.bunniesGetOlder();
+        bunnyList.bunniesGetOlder();
+        bunnyList.bunniesGetOlder();
+        bunnyList.bunniesGetOlder();
+        bunnyList.bunniesGetOlder();
+        bunnyList.bunniesGetOlder();
+        bunnyList.bunniesGetOlder();
+        bunnyList.bunniesGetOlder();
+        bunnyList.bunniesGetOlder();
         cout << "\n\nBunnies got older!\n\n" << endl;
     
-    
+        //Bunnies Are Born
         LinkedList newbornBunnies = bunnyList.bunniesAreBorn();
         cout << "****************Newborns*******************" << endl;
     
-        newbornBunnies.printList();
+        if(newbornBunnies.getHead() != NULL) newbornBunnies.printList();
+        else cout << "noBirths" << endl;
     
         cout << "****************Newborns*******************\n" << endl;
+    
+        //Newborn Bunnies Added to bunnyList
         if(newbornBunnies.getHead() != NULL)
         {
             cout << "\n\nAdding newborns to family!\n\n" << endl;
@@ -96,10 +107,40 @@ int main(int argc, char** argv)
         }
     
     
-        cout << "\n\nPRINTING LAST LIST:\n" << endl;
+        cout << "\n\nPRINTING NEW POPULATION:\n" << endl;
         bunnyList.printList();
     
-        delete bunnyList.getHead();
+        cout << "***********************************" << endl;
+        cout << bunnyList.getSize() << " bunnies are in the list"<< endl;
+        cout << "***********************************\n" << endl;
+    
+        //Bunnies Get Old and Die
+        LinkedList olderBunnies = bunnyList.bunniesDie();
+        cout << "\n\nSlowSingingAndFlowerBringing\n\n" << endl;
+        cout << "****************Obituary*******************" << endl;
+    
+        if(olderBunnies.getHead() != NULL) olderBunnies.printList();
+        else cout<< "noDeaths" << endl;
+    
+        cout << "****************Obituary*******************\n" << endl;
+    
+        //Ederly Deceased Bunnies Removed From bunnyList
+    
+        
+        /*if(olderBunnies.getHead() != NULL)
+        {
+            cout << "\n\nRemoving deceased from family!\n\n" << endl;
+            bunnyList = bunnyList.removeOlderBunnies(olderBunnies);
+        }*/
+    
+
+        cout << "\n\nPRINTING NEW POPULATION:\n" << endl;
+        bunnyList.printList();
+    
+        cout << "***********************************" << endl;
+        cout << bunnyList.getSize() << " bunnies are in the list"<< endl;
+        cout << "***********************************\n" << endl;
+        //delete bunnyList.getHead();
         bunnyNamesFile.close();
     
     

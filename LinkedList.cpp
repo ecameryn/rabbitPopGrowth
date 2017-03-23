@@ -1,44 +1,7 @@
 #ifndef LINKEDLIST_CPP
 #define LINKEDLIST_CPP
 
-#include "Rabbit.cpp"
-
-//using namespace std;
-
-class LinkedList
-{
-private:
-    
-    typedef struct node
-    {
-        Rabbit data;
-        node* next;
-    }* nodePtr;
-    
-    nodePtr head;
-    nodePtr current;
-    //nodePtr newCurrent;
-    nodePtr temp;
-    int size;
-    
-    
-public: //Functions go here
-    
-    LinkedList();
-    void addNode(Rabbit addBunny);
-    void deleteNode(Rabbit deleteBunny);
-    void printList();
-    int getSize(){return size;};
-    nodePtr getHead(){return head;};
-    
-    LinkedList bunniesAreBorn();
-    void bunniesGetOlder();
-    //void bunniesCanBeMutantVamps();
-    //LinkedList bunniesDie();
-    LinkedList combineNewbornsList(LinkedList newbornsList);
-};
-
-
+#include "LinkedList.hpp"
 
 int size = 0;
 
@@ -157,6 +120,23 @@ LinkedList LinkedList::combineNewbornsList(LinkedList newbornsList)
     
 }
 
+LinkedList LinkedList::removeOlderBunnies(LinkedList seniorsList)
+{
+    LinkedList afterDeathsList;
+    nodePtr seniorsListCurrent = seniorsList.getHead();
+    
+    current = head;
+    
+    while(current != NULL)
+    {
+        while(seniorsListCurrent != NULL)
+        {
+            //if(current->data.getName());
+        }
+    }
+    return afterDeathsList;
+}
+
 LinkedList LinkedList::bunniesAreBorn()
 {
     LinkedList babyBunniesList;
@@ -238,7 +218,30 @@ void LinkedList::bunniesGetOlder()
     
 }
 
-
-
+LinkedList LinkedList::bunniesDie()
+{
+    LinkedList olderBunniesList;
+    current = head;
+    nodePtr deadBunny;
+    
+    while(current != NULL)
+    {
+        if(current->data.getAge() > 10)
+        {
+            olderBunniesList.addNode(current->data);
+            deadBunny = current;
+            
+        }
+        
+        current = current->next;
+        if(deadBunny != NULL)
+        {
+            deleteNode(deadBunny->data);
+            deadBunny = NULL;
+        }
+    }
+    
+    return olderBunniesList;
+}
 
 #endif /* LINKEDLIST_CPP */
