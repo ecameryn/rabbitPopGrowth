@@ -65,7 +65,6 @@ void LinkedList::deleteNode(Rabbit deleteBunny)
             temp = NULL;
         }
         
-        cout << deletePtr->data.getName() << " was deleted from the list\n"<< endl;
         delete deletePtr;
         
         
@@ -120,7 +119,7 @@ LinkedList LinkedList::combineNewbornsList(LinkedList newbornsList)
     
 }
 
-LinkedList LinkedList::removeOlderBunnies(LinkedList seniorsList)
+/*LinkedList LinkedList::removeOlderBunnies(LinkedList seniorsList)
 {
     LinkedList afterDeathsList;
     nodePtr seniorsListCurrent = seniorsList.getHead();
@@ -135,7 +134,7 @@ LinkedList LinkedList::removeOlderBunnies(LinkedList seniorsList)
         }
     }
     return afterDeathsList;
-}
+}*/
 
 LinkedList LinkedList::bunniesAreBorn()
 {
@@ -202,6 +201,43 @@ LinkedList LinkedList::bunniesAreBorn()
     
 }
 
+int LinkedList::howManyMutantsBorn(LinkedList newbornsList)
+{
+    int count = 0;
+    current = newbornsList.getHead();
+    
+    while(current != NULL)
+    {
+        if(current->data.isRadioactiveMutant())
+        {
+            count++;
+        }
+        
+        current = current->next;
+    }
+    
+    return count;
+}
+
+void LinkedList::mutantBunniesInfect(int amountToInfect)
+{
+    current = head;
+    int amountInfected = 0;
+    
+    while(current != NULL && amountInfected <= amountToInfect)
+    {
+        if(!current->data.isRadioactiveMutant())
+        {
+            current->data.setRadioMutantVampStatus(true);
+            amountInfected++;
+            cout << current->data.getName() << " was infected!"
+            <<endl;
+        }
+        current = current->next;
+    }
+    
+}
+       
 
 void LinkedList::bunniesGetOlder()
 {
@@ -233,12 +269,13 @@ LinkedList LinkedList::bunniesDie()
             
         }
         
-        current = current->next;
+        
         if(deadBunny != NULL)
         {
             deleteNode(deadBunny->data);
             deadBunny = NULL;
         }
+        current = current->next;
     }
     
     return olderBunniesList;

@@ -20,7 +20,7 @@ class Rabbit
 {
 private:
     string name; //get from bunnyName file
-    string sex; //enum: 0 = male, 1 = female;
+    string sex; //0 = male, 1 = female;
     string color;
     int age;
     bool radioactive_mutant_vampire_bunny; //2% probability

@@ -40,8 +40,9 @@ public: //Functions go here
     nodePtr getHead(){return head;};
     
     LinkedList bunniesAreBorn();
+    int howManyMutantsBorn(LinkedList newbornsList);
     void bunniesGetOlder();
-    //void bunniesCanBeMutantVamps();
+    void mutantBunniesInfect(int amountToInfect);
     LinkedList bunniesDie();
     LinkedList combineNewbornsList(LinkedList newbornsList);
     LinkedList removeOlderBunnies(LinkedList seniorsList);
