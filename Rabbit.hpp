@@ -44,14 +44,14 @@ public:
     void setSex(string sex){this -> sex = sex;}
     void setColor(string color){this -> color = color;}
     void setAge(int age){this -> age = age;}
-    void setRadioMutantVampStatus(bool choice){radioactive_mutant_vampire_bunny = choice;}
+    void setRadioMutantVampStatus(bool choice){this->radioactive_mutant_vampire_bunny = choice;}
     void setDeceased(bool choice){deceased = choice;}
     
     string getName(){return this->name;}
     string getSex(){return this->sex;}
     string getColor(){return this->color;}
     int getAge(){return this->age;}
-    bool isRadioactiveMutant(){return this->radioactive_mutant_vampire_bunny;}
+    bool isRadioactiveMutant(){return this->radioactive_mutant_vampire_bunny;}//Getter for mutant status
     bool isDeceased(){return this->deceased;}
     void increaseAge(int age)
     {

@@ -138,68 +138,50 @@ LinkedList LinkedList::combineNewbornsList(LinkedList newbornsList)
 
 LinkedList LinkedList::bunniesAreBorn()
 {
+    cout << "\n\ninside bunnies are born" << endl;
     LinkedList babyBunniesList;
     current = head;
+    Rabbit newBaby;
+    //bool atLeast1ViableMale = false;
     //Rabbit bunny = current->data;
-    bool isAtLeastOneMale = false;
     
-    while(current != NULL && !isAtLeastOneMale)
+    while(current != NULL)
     {
-        if(!current->data.isRadioactiveMutant())
+        if(current->data.getSex().compare("female") && !current->data.isRadioactiveMutant())
         {
-            if(current->data.getSex().compare("male"))
-            {
-                if(current->data.getAge() >= 2)
-                {
-                    isAtLeastOneMale = true;
-                    cout << "there is @least 1 non-mutantVamp male w/age > 2\n "<<endl;
-                }
-                else
-                {
-                    current = current->next;
-                    //if(current != NULL) bunny = current->data;
-                }
-            }
-            else
-            {
-                current = current->next;
-                //if(current != NULL) bunny = current->data;
-            }
+            cout <<current->data.getColor() <<" "<< current->data.getSex() << " is about to give birth! " <<endl;
+            
+            newBaby = Rabbit(current->data.getColor());
+            babyBunniesList.addNode(newBaby);
+            
+            cout << current->data.getSex() << " just gave birth to " << newBaby.getColor() <<" "<< newBaby.getName() <<"\n"<< endl;
         }
         
         current = current->next;
-        //if(current != NULL) bunny = current->data;
     }
     
-    current = head;
-    //bunny = current->data;
-    Rabbit newBaby;
-    
-    if(isAtLeastOneMale)
-    {
-        while(current != NULL)
-        {
-            if(current->data.getSex() == "female" && current->data.getAge() >= 2)
-            {
-                cout <<current->data.getColor() <<" "<< current->data.getSex() << " is about to give birth! " <<endl;
-                
-                newBaby = Rabbit(current->data.getColor());
-                babyBunniesList.addNode(newBaby);
-                
-                cout << current->data.getSex() << " just gave birth to " << newBaby.getColor() <<" "<< newBaby.getName() <<"\n"<< endl;
-            }
-            
-            current = current->next;
-            //if(current != NULL) bunny = current->data;
-            
-        }
-    }
-    
-    //babyBunniesList.printList();
-               
     return babyBunniesList;
     
 }
+
+
+bool LinkedList::hasOneNonMutantMale()
+{
+    bool nonMutantMale = false;
+    current = head;
+    
+    while (current != NULL)
+    {
+        if(current->data.getSex().compare("male") && !current->data.isRadioactiveMutant())
+        {
+            nonMutantMale = true;
+            return nonMutantMale;
+        }
+    }
+    
+    return nonMutantMale;
+}
+
 
 int LinkedList::howManyMutantsBorn(LinkedList newbornsList)
 {
@@ -252,6 +234,8 @@ void LinkedList::bunniesGetOlder()
         current = current->next;
     }
     
+    colonyAge++;
+    
 }
 
 LinkedList LinkedList::bunniesDie()
@@ -279,6 +263,26 @@ LinkedList LinkedList::bunniesDie()
     }
     
     return olderBunniesList;
+}
+
+void LinkedList::cullHalfPopulation(LinkedList currentPopulation)
+{
+    int cullBy = currentPopulation.getSize() / 2;
+    current = head;
+    nodePtr deadBunny;
+    
+    for(int i = 0; i < cullBy; i++)
+    {
+        deadBunny = current;
+        current = current->next;
+        deleteNode(deadBunny->data);
+    }
+}
+
+bool LinkedList::allDead(LinkedList bunniesList)
+{
+    if(bunniesList.getSize() < 2) return true;
+    else return false;
 }
 
 #endif /* LINKEDLIST_CPP */

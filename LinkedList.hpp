@@ -26,6 +26,7 @@ private:
     //nodePtr newCurrent;
     nodePtr temp;
     int size;
+    int colonyAge;
     
     
 public: //Functions go here
@@ -38,14 +39,20 @@ public: //Functions go here
     void printList();
     int getSize(){return size;};
     nodePtr getHead(){return head;};
+    int getColonyAge(){return colonyAge;};
+    
     
     LinkedList bunniesAreBorn();
     int howManyMutantsBorn(LinkedList newbornsList);
+    bool hasOneNonMutantMale();
     void bunniesGetOlder();
     void mutantBunniesInfect(int amountToInfect);
     LinkedList bunniesDie();
     LinkedList combineNewbornsList(LinkedList newbornsList);
     LinkedList removeOlderBunnies(LinkedList seniorsList);
+    void cullHalfPopulation(LinkedList currentPopulation);
+    bool allDead(LinkedList bunniesList);
+    
     
 };
 
