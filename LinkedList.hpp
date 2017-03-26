@@ -1,7 +1,7 @@
 //
 //  LinkedList.hpp
 //  
-//
+//  Implement LinkedList DataStructure
 //  Created by Cameryn Holstick
 //
 //
@@ -29,8 +29,7 @@ private:
     int colonyAge;
     
     
-public: //Functions go here
-    
+public:     
     LinkedList();
     //~LinkedList(){delete head;};
     
@@ -52,6 +51,7 @@ public: //Functions go here
     LinkedList removeOlderBunnies(LinkedList seniorsList);
     LinkedList cullHalfPopulation();
     bool allDead();
+    bool atLeastOneElder();
     
     
 };

@@ -12,6 +12,7 @@
 
 int main(int argc, char** argv)
 {
+    
     LinkedList bunnyList;
     
     Rabbit bunny1 = Rabbit();
@@ -35,7 +36,8 @@ int main(int argc, char** argv)
     int newMutantsCount = 0;
     int x = 0;
     
-    while(x < 100)
+    //Begin
+    while(x < 1000)
     {
         
         //Cull Half of Colony if Population is Greater Than 1000
@@ -49,6 +51,7 @@ int main(int argc, char** argv)
         //Terminate Program When All Bunnies Die
         if(bunnyList.allDead())
         {
+            cout<< "colony age: " << bunnyList.getColonyAge() << endl;
             return 0;
         }
         
@@ -63,18 +66,36 @@ int main(int argc, char** argv)
         //Age the bunnies by 1 year through each pass
         bunnyList.bunniesGetOlder();
         
-        //Bunnies Are Born
+        
+        //Bunnies Don't Live Past 10yrs of Age
+        if(bunnyList.atLeastOneElder() )
+        {
+            //Bunnies Get Old and Die
+            LinkedList olderBunniesList = bunnyList.bunniesDie();
+            
+            cout << "================DEAD Bunnies(TOP)===================" << endl;
+            
+            if(olderBunniesList.getHead() != NULL) olderBunniesList.printList();
+            else cout<< "noDeaths" << endl;
+            
+            cout << "================DEAD Bunnies(END)===================\n\n\n" << endl;
+            
+        }
+        
+        //Bunnies Are Born And Can Infect Colony if They Are Mutants
         if(bunnyList.getColonyAge() > 2 && bunnyList.hasOneNonMutantMale())
         {
             LinkedList newbornBunniesList = bunnyList.bunniesAreBorn();
             
-            cout << "****************Newborns(TOP)*******************" << endl;
+            cout <<"+++++++++++++++Newborns(TOP)++++++++++++++++" << endl;
             
-                if(newbornBunniesList.getHead() != NULL) newbornBunniesList.printList();
-                else cout << "noBirths" << endl;
+            if(newbornBunniesList.getHead() != NULL) newbornBunniesList.printList();
+            else cout << "noBirths" << endl;
             
-            cout << "****************Newborns(END)*******************\n" << endl;
-            cout << "****************"<< newbornBunniesList.getSize() <<"*******************\n" << endl;
+            cout << "+++++++++++++++Newborns(END)++++++++++++++++\n" << endl;
+            cout << "              ["
+                 << newbornBunniesList.getSize()
+                 <<" Total Newborns]"<<"              \n" << endl;
             
             //Newborn Bunnies Added to bunnyList
             if(newbornBunniesList.getHead() != NULL)
@@ -82,7 +103,7 @@ int main(int argc, char** argv)
                 bunnyList = bunnyList.combineNewbornsList(newbornBunniesList);
             }
             
-             newMutantsCount = bunnyList.howManyMutantsBorn(newbornBunniesList);
+            newMutantsCount = bunnyList.howManyMutantsBorn(newbornBunniesList);
             
             
             if(newMutantsCount > 0)
@@ -92,38 +113,25 @@ int main(int argc, char** argv)
             }
         }
         
-    
-        
-        //Bunnies Don't Live Past 10yrs of Age
-        if(bunnyList.getColonyAge() > 10)
-        {
-            //Bunnies Get Old and Die
-            LinkedList olderBunnies = bunnyList.bunniesDie();
-            
-            cout << "****************Obituary(TOP)*******************" << endl;
-            
-                if(olderBunnies.getHead() != NULL) olderBunnies.printList();
-                else cout<< "noDeaths" << endl;
-            
-            cout << "****************Obituary(END)*******************\n" << endl;
-            
-        }
-    
-        /*cout << "\n\nPRINTING NEW POPULATION:" << endl;
+        cout << "\n\nPRINTING NEW POPULATION:" << endl;
         bunnyList.printList();
         
         cout << "***********************************" << endl;
         cout << bunnyList.getSize() << " bunnies are in the population"<< endl;
-        cout << "***********************************\n" << endl;*/
+        cout << "***********************************\n" << endl;
     
     
         x++;
     }
     
+    cout << "\n\nPRINTING FINAL POPULATION:" << endl;
+    bunnyList.printList();
     
-    // x = x + 1;
-    //}
+    cout << "***********************************" << endl;
+    cout << bunnyList.getSize() << " bunnies are in the population (FINAL)"<< endl;
+    cout << "***********************************\n" << endl;
     
+    //cout<< "colony age: " << bunnyList.getColonyAge() << endl;
     //bunnyList.printList();
     delete bunnyList.getHead();
     return 0;

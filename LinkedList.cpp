@@ -86,7 +86,7 @@ void LinkedList::printList()
         cout << "Color: "<< current->data.getColor() << endl;
         cout << "Age: "<< current->data.getAge() << endl;
         cout << "MutantVamp?: "<< current->data.isRadioactiveMutant() << endl;
-        cout << "Dearly Departed: "<< current->data.isDeceased() << "\n" << endl;
+        cout<< "\n" << endl;
         
         current = current->next;
         
@@ -149,12 +149,19 @@ LinkedList LinkedList::bunniesAreBorn()
     {
         if(current->data.getSex() == "female" && !current->data.isRadioactiveMutant())
         {
-            cout <<current->data.getColor() <<" "<< current->data.getSex() << " is about to give birth! " <<endl;
+            cout <<current->data.getColor() <<" "
+                << current->data.getSex()
+                << " is about to give birth! "
+                <<endl;
             
             newBaby = Rabbit(current->data.getColor());
             babyBunniesList.addNode(newBaby);
             
-            cout << current->data.getSex() << " just gave birth to " << newBaby.getColor() <<" "<< newBaby.getName() <<"\n"<< endl;
+            cout<< current->data.getSex() <<" "
+                << " just gave birth to "
+                << newBaby.getColor() <<" "
+                << newBaby.getName() <<"\n"
+                << endl;
         }
         
         current = current->next;
@@ -264,11 +271,28 @@ LinkedList LinkedList::bunniesDie()
     return olderBunniesList;
 }
 
+bool LinkedList::atLeastOneElder()
+{
+    current = head;
+    bool isElder = false;
+    
+    while(current != NULL)
+    {
+        if(current->data.getAge() >= 10)
+        {
+            isElder = true;
+            return isElder;
+        }
+        current = current->next;
+    }
+    
+    return isElder;
+}
 
 LinkedList LinkedList::cullHalfPopulation()
 {
     LinkedList afterCullList;
-    int cullBy = getSize() / 5;
+    int cullBy = getSize() / 2;
     current = head;
     
     cout << "In cullHalfPop. Will Cull: "<< cullBy << endl;

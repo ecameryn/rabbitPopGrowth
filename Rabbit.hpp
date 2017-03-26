@@ -52,7 +52,7 @@ public:
     string getColor(){return this->color;}
     int getAge(){return this->age;}
     bool isRadioactiveMutant(){return this->radioactive_mutant_vampire_bunny;}//Getter for mutant status
-    bool isDeceased(){return this->deceased;}
+    bool isDeceased(){return this->deceased;}//Need to implement along w
     void increaseAge(int age)
     {
         this->setAge(this->getAge()+1);
