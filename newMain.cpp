@@ -43,7 +43,7 @@ int main(int argc, char** argv)
     if(newbornBunnies.getHead() != NULL) newbornBunnies.printList();
     else cout << "noBirths" << endl;
     
-    cout << "****************Newborns(END)*******************\n" << endl;
+    cout << "****************Newborns≥(END)*******************\n" << endl;
     
     int newMutantsCount = bunnyList.howManyMutantsBorn(newbornBunnies);
     

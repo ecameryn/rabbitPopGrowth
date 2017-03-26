@@ -59,7 +59,9 @@ Rabbit::Rabbit(string color)
     //set bunny name from line in .txt file
     if(bunnyNamesFile.is_open())
     {
+        while(bunnyNamesFile.peek() == ' ') bunnyNamesFile.get();
         getline(bunnyNamesFile, lineWithName);
+        while(bunnyNamesFile.peek() == ' ') bunnyNamesFile.get();
         setName(lineWithName);
     }
     

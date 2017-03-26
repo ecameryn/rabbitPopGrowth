@@ -50,8 +50,8 @@ public: //Functions go here
     LinkedList bunniesDie();
     LinkedList combineNewbornsList(LinkedList newbornsList);
     LinkedList removeOlderBunnies(LinkedList seniorsList);
-    void cullHalfPopulation(LinkedList currentPopulation);
-    bool allDead(LinkedList bunniesList);
+    LinkedList cullHalfPopulation();
+    bool allDead();
     
     
 };

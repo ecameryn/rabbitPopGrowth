@@ -138,7 +138,7 @@ LinkedList LinkedList::combineNewbornsList(LinkedList newbornsList)
 
 LinkedList LinkedList::bunniesAreBorn()
 {
-    cout << "\n\ninside bunnies are born" << endl;
+    //cout << "\n\ninside bunnies are born" << endl;
     LinkedList babyBunniesList;
     current = head;
     Rabbit newBaby;
@@ -147,7 +147,7 @@ LinkedList LinkedList::bunniesAreBorn()
     
     while(current != NULL)
     {
-        if(current->data.getSex().compare("female") && !current->data.isRadioactiveMutant())
+        if(current->data.getSex() == "female" && !current->data.isRadioactiveMutant())
         {
             cout <<current->data.getColor() <<" "<< current->data.getSex() << " is about to give birth! " <<endl;
             
@@ -212,8 +212,7 @@ void LinkedList::mutantBunniesInfect(int amountToInfect)
         {
             current->data.setRadioMutantVampStatus(true);
             amountInfected++;
-            cout << current->data.getName() << " was infected!"
-            <<endl;
+            cout << current->data.getName() << " was infected!" << endl;
         }
         current = current->next;
     }
@@ -265,23 +264,33 @@ LinkedList LinkedList::bunniesDie()
     return olderBunniesList;
 }
 
-void LinkedList::cullHalfPopulation(LinkedList currentPopulation)
+
+LinkedList LinkedList::cullHalfPopulation()
 {
-    int cullBy = currentPopulation.getSize() / 2;
+    LinkedList afterCullList;
+    int cullBy = getSize() / 5;
     current = head;
-    nodePtr deadBunny;
     
-    for(int i = 0; i < cullBy; i++)
+    cout << "In cullHalfPop. Will Cull: "<< cullBy << endl;
+    while (cullBy >= 0 && afterCullList.getSize() == cullBy)
     {
-        deadBunny = current;
+        afterCullList.addNode(current->data);
+        nodePtr oldCurr = current;
         current = current->next;
-        deleteNode(deadBunny->data);
+        deleteNode(oldCurr->data);
+        cullBy--;
+        cout << "In cullHalfPop->while." << endl;
+        cout << "Size of afterCullList: " << afterCullList.getSize()<< endl;
     }
+    
+    cout << "Coming out of cullHalfPop." << endl;
+    return afterCullList;
 }
 
-bool LinkedList::allDead(LinkedList bunniesList)
+bool LinkedList::allDead()
 {
-    if(bunniesList.getSize() < 2) return true;
+    if(getSize() < 2) return true;
+    //if()
     else return false;
 }
 
